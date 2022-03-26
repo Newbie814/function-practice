@@ -65,9 +65,9 @@ startGameBtn.addEventListener('click', () => {
   const computerChoice = getComputerChoice();
   let winner;
   if (playerSelection) {
-    const winner = determineWinner(computerChoice, playerSelection);
-  } else {
     winner = determineWinner(computerChoice, playerSelection);
+  } else {
+    winner = determineWinner(computerChoice);
   }
 
   console.log('Player throws ' + playerSelection);
