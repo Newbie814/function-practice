@@ -108,3 +108,92 @@ startGameBtn.addEventListener('click', () => {
 // });
 
 // adding a name to the above could help with locating a thrown error
+
+//  Not for game. rest parameter is for functions that take in a variable number of arguments.
+
+// const sumUp = (numbers) => {
+//   let sum = 0;
+//   for (const num of numbers) {
+//     sum += num;
+//   }
+//   return sum;
+// };
+
+// reminder that return allows me to access variable sum outside of function
+
+// console.log(sumUp([1, 5, 10, -3, 6, 10]));
+
+// const sumUp = (...numbers) => {
+//   let sum = 0;
+//   for (const num of numbers) {
+//     sum += num;
+//   }
+//   return sum;
+// };
+
+// console.log(sumUp(1, 5, 10, -3, 6, 10));
+
+// be mindful, in the first example, the function is called with the arguments, and the second is called with the rest parameter. You have to soecify array in console log of the first example. The second example is called with the rest parameter, which "coerces" the arguments into an array. You saw this more clearly in the debugger in devtools.
+
+// can only be one rest parameter per function..
+// has to be the last parameter
+
+const combine = (resultHandler, operation, ...numbers) => {
+  const validateNumber = (number) => {
+    return isNaN(number) ? 0 : number;
+  };
+
+  let sum = 0;
+  for (const num of numbers) {
+    if (operation === 'ADD') {
+      sum += validateNumber(num);
+    } else if (operation === 'SUBTRACT') {
+      sum -= validateNumber(num);
+    }
+  }
+  resultHandler(sum);
+};
+
+// const subtractUp = function(resultHandler, ...numbers) {
+//   let sum = 0;
+//   for (const num of numbers) {
+//     // don't use that
+//     sum -= num;
+//   }
+//   resultHandler(sum);
+// };
+
+const showResult = (msgText, result) => {
+  alert(msgText + '' + result);
+};
+
+combine(
+  showResult.bind(this, 'The numbers add to: '),
+  'ADD',
+  1,
+  5,
+  'fdsa',
+  -3,
+  6,
+  10
+);
+combine(
+  showResult.bind(this, 'The numbers add to: '),
+  'ADD',
+  1,
+  5,
+  10,
+  -3,
+  6,
+  10,
+  25,
+  88
+);
+combine(
+  showResult.bind(this, 'The numders after subtraction equal: '),
+  'SUBTRACT',
+  1,
+  10,
+  15,
+  20
+);
